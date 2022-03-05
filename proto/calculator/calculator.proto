@@ -1,0 +1,15 @@
+syntax = "proto3";
+package calculator;
+
+
+service Calulator {
+    rpc Add(NumberReq) returns (Result) {}
+}
+
+message NumberReq {
+    repeated int32 numbers = 1;
+}
+
+message Result {
+    float output = 1;
+}

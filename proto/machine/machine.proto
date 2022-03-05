@@ -1,0 +1,26 @@
+syntax = "proto3";
+package machine;
+
+
+service Machine {
+    rpc Execute(InstructionSet) returns (Result) {}
+    rpc ExecuteStream(stream Instruction) returns (Result) {}
+
+
+    // ServerStreamingExecute accepts a set of Instructions from client and returns a stream of Result.
+    rpc ServerStreamingExecute(InstructionSet) returns (stream Result) {}
+    rpc ServerStreamingExecuteStream(stream Instruction) returns (stream Result) {}
+}
+
+message Instruction {
+    string operator = 1;
+    int32 operand = 2;
+}
+
+message InstructionSet {
+    repeated Instruction instructions = 1;
+}
+
+message Result {
+    float output = 1;
+}
